@@ -14,7 +14,7 @@ RUN sed -i "s/http:\/\/archive.ubuntu.com/http:\/\/mirrors.aliyun.com/g" /etc/ap
     mv /tmp/files/pwn /home/ctf/pwn && \
     mv /tmp/files/start.sh / && \
     mv /tmp/files/flag.sh / && \
-    rm -rf /tmp/* /var/tmp/*
+    rm -rf /tmp/* /var/tmp/* && \
     sed -i 's/#Port 22/Port 9999/g' /etc/ssh/sshd_config
 
 WORKDIR /home/ctf
