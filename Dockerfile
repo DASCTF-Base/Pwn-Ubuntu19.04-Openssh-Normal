@@ -2,8 +2,13 @@ FROM ubuntu:19.04
 
 COPY ./files/ /tmp/files
 
-RUN sed -i "s/http:\/\/archive.ubuntu.com/http:\/\/mirrors.aliyun.com/g" /etc/apt/sources.list && \
-    sed -i '/security/d' /etc/apt/sources.list && \
+RUN rm /etc/apt/sources.list && \
+    touch /etc/apt/sources.list && \
+    echo 'deb http://old-releases.ubuntu.com/ubuntu/ disco main restricted' >> /etc/apt/sources.list && \
+    echo 'deb http://old-releases.ubuntu.com/ubuntu/ disco-updates main restricted' >> /etc/apt/sources.list && \
+    echo 'deb http://old-releases.ubuntu.com/ubuntu/ disco universe' >> /etc/apt/sources.list && \
+    echo 'deb http://old-releases.ubuntu.com/ubuntu/ disco-updates universe' >> /etc/apt/sources.list && \
+    echo 'deb http://old-releases.ubuntu.com/ubuntu/ disco-backports main restricted universe multiverse' >> /etc/apt/sources.list && \
     apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y lib32z1 openssh-server libstdc++6 lib32stdc++6 && \
     echo 'ctf - nproc 1500' >>/etc/security/limits.conf && \
